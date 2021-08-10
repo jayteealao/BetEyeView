@@ -3,12 +3,13 @@ from dotenv import dotenv_values
 from beteyeview.database.db import metadata
 from sqlalchemy import engine_from_config, create_engine
 from sqlalchemy import pool
-
+import sys, os
 from alembic import context
 
 env_vars = dotenv_values('.env')
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
+sys.path.append(os.getcwd())
 config = context.config
 
 # Interpret the config file for Python logging.
@@ -73,6 +74,7 @@ def run_migrations_online():
         context.configure(
             connection=connection,
             target_metadata=target_metadata,
+            include_schemas=True,
             user_module_prefix='sa.'
         )
 
