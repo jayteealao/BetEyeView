@@ -31,7 +31,6 @@ jobs:
       with:
         name: extrafile
     - name: Print the final result
-      shell: bash
       run: |
         pip install ./extra/NaijaBet-Api-0.2.0.tar.gz
     - name: Install dependencies
