@@ -1,6 +1,8 @@
 from logging.config import fileConfig
 from dotenv import dotenv_values
-from beteyeview.database.db import metadata
+from beteyeview.database.base import BaseMeta
+from beteyeview.models.match import Match
+from beteyeview.models.book import Bet9jaOdd, BetkingOdd, NairabetOdd
 from sqlalchemy import engine_from_config, create_engine
 from sqlalchemy import pool
 import sys, os
@@ -20,8 +22,9 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = metadata
 
+target_metadata = BaseMeta.metadata
+print(target_metadata.tables)
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
@@ -74,7 +77,6 @@ def run_migrations_online():
         context.configure(
             connection=connection,
             target_metadata=target_metadata,
-            include_schemas=True,
             user_module_prefix='sa.'
         )
 
