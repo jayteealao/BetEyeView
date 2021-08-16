@@ -3,6 +3,7 @@ import asyncio
 import sqlalchemy
 import datetime
 import databases
+import os
 import pydantic
 from tests.settings import TEST_DATABASE_URL
 from beteyeview.models.match import Match

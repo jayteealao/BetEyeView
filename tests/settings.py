@@ -1,4 +1,7 @@
 import os
 import databases
+from dotenv import load_dotenv
 
-TEST_DATABASE_URL = 'postgresql://postgres:daddyy@localhost:5432/test'
+load_dotenv()
+
+TEST_DATABASE_URL = os.environ.get('POSTGRES_TEST')
