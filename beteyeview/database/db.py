@@ -1,12 +1,14 @@
-from dotenv import dotenv_values
-
+from dotenv import load_dotenv
+import os
 import databases
 import sqlalchemy
 
-config = dotenv_values('.env')
+load_dotenv()
 
-DATABASE_URL = config['POSTGRES']
-database = databases.Database(DATABASE_URL, force_rollback=True)
+
+DATABASE_URL = os.environ.get('POSTGRES', None)
+
+database = databases.Database(DATABASE_URL)
 metadata = sqlalchemy.MetaData()
 
 engine = sqlalchemy.create_engine(DATABASE_URL)
