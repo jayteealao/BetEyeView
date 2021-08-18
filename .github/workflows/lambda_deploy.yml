@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Deploy code to Lambda
-        uses: jayteealao/py-lambda-action@v1.0.0
+        uses: jayteealao/py-lambda-action@1.0.2
         with:
           lambda_layer_arn: "arn:aws:lambda:us-east-2:760141912310:layer:bevtestlayer:3"
           lambda_function_name: "bevtest"
