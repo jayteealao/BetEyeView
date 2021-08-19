@@ -1,31 +1,26 @@
 from pprint import pprint
+
 from beteyeview.crud.bookies_data import retrieve_data
-from beteyeview.models.match import Match
 from beteyeview.models.book import Bet9jaOdd, BetkingOdd, NairabetOdd
+from beteyeview.models.match import Match
 
 
 async def populate_tables():
 
     data = retrieve_data()
-
+# TODO add mechanism for adding date to odds table after creating it
     for event, b9, bk, nb in data:
-        match = await Match.objects.update_or_create(**event)
+        if not await Match.objects.get_or_none(match=event['match'], league=event['league']):
+            match = await Match.objects.create(**event)
+        else:
+            match = await Match.objects.get(match=event['match'], league=event['league'])
         pk = match.pk
         if b9 != {}:
-            await Bet9jaOdd.objects.get_or_create(match=pk, **b9)
+            data = {**b9, 'match': pk}
+            await Bet9jaOdd.objects.get_or_create(**data)
         if bk != {}:
-            await BetkingOdd.objects.get_or_create(match=pk, **bk)
+            data = {**bk, 'match': pk}
+            await BetkingOdd.objects.get_or_create(**data)
         if nb != {}:
-            await NairabetOdd.objects.get_or_create(match=pk, **nb)
-
-    # print(await Bet9jaOdd.objects.count())
-    # b9 = await Bet9jaOdd.objects.get_or_create(**{'match': pk, 'book_id': 145087782, 'home': '3.6', 'draw': '3.15', 'away': '2.1', 'home_or_away': '1.28', 'home_or_draw': '1.6', 'draw_or_away': '1.21'})
-    # pprint(b9)
-    # print(await Bet9jaOdd.objects.count())
-
-    # print(await Match.objects.all())
-    # pprint(await Bet9jaOdd.objects.all())
-    # pprint('space')
-    # pprint(await Bet9jaOdd.objects.select_all(follow=True).all())
-    # print(await BetkingBook.objects.all())
-    # print(await NairabetBook.objects.all())
+            data = {**nb, 'match': pk}
+            await NairabetOdd.objects.get_or_create(**data)

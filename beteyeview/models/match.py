@@ -7,7 +7,7 @@ from sqlalchemy import func
 
 class Match(ormar.Model):
     class Meta(BaseMeta):
-        tablename = 'matches'
+        tablename = "matches"
 
     id: int = ormar.Integer(primary_key=True)
     match: str = ormar.String(nullable=False, max_length=255)
@@ -23,9 +23,9 @@ class Match(ormar.Model):
     # updated_at: str = ormar.DateTime(nullable=False, default=datetime.datetime.now(), timezone=True)
 
 
-class TestTable(ormar.Model):
-    class Meta(BaseMeta):
-        tablename = 'tests'
+# class TestTable(ormar.Model):
+#     class Meta(BaseMeta):
+#         tablename = 'tests'
 
-    id: int = ormar.Integer(primary_key=True)
-    created_at: datetime = ormar.DateTime(server_default=func.now())
+#     id: int = ormar.Integer(primary_key=True)
+#     created_at: datetime = ormar.DateTime(server_default=func.now())

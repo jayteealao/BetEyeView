@@ -1,5 +1,5 @@
 import ormar
-import json
+from datetime import datetime, timezone
 from beteyeview.database.base import BaseMeta
 from beteyeview.models.match import Match
 from typing import Optional
@@ -14,6 +14,7 @@ class Bet9jaOdd(ormar.Model):
     id: int = ormar.Integer(primary_key=True)
     book_id: int = ormar.Integer()
     match: Optional[Match] = ormar.ForeignKey(Match)
+    created_at: Optional[str] = ormar.DateTime(nullable=False, default=datetime.now(tz=timezone.utc), timezone=True)
     # match_id: int = ormar.Integer()
     # name: str = ormar.String(nullable=False, max_length=255)
     # odds: json = ormar.JSON(nullable=False)
@@ -34,6 +35,7 @@ class BetkingOdd(ormar.Model):
     # match_id: int = ormar.Integer()
     # book_id: int = ormar.Integer(primary_key=True, autoincrement=False)
     match: Optional[Match] = ormar.ForeignKey(Match)
+    created_at: Optional[str] = ormar.DateTime(nullable=False, default=datetime.now(tz=timezone.utc), timezone=True)
     # match_id: int = ormar.Integer()
     # name: str = ormar.String(nullable=False, max_length=255)
     # odds: json = ormar.JSON(nullable=False)
@@ -54,6 +56,7 @@ class NairabetOdd(ormar.Model):
     # match_id: int = ormar.Integer()
     # book_id: int = ormar.Integer(primary_key=True, autoincrement=False)
     match: Optional[Match] = ormar.ForeignKey(Match)
+    created_at: Optional[str] = ormar.DateTime(nullable=False, default=datetime.now(tz=timezone.utc), timezone=True)
     # match_id: int = ormar.Integer()
     # name: str = ormar.String(nullable=False, max_length=255)
     # odds: json = ormar.JSON(nullable=False)
