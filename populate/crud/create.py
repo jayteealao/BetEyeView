@@ -1,8 +1,8 @@
 from pprint import pprint
 
-from beteyeview.crud.bookies_data import retrieve_data
-from beteyeview.models.book import Bet9jaOdd, BetkingOdd, NairabetOdd
-from beteyeview.models.match import Match
+from populate.crud.bookies_data import retrieve_data
+from populate.models.book import Bet9jaOdd, BetkingOdd, NairabetOdd
+from populate.models.match import Match
 
 
 async def populate_tables():

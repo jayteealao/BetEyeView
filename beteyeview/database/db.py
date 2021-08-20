@@ -6,7 +6,7 @@ import sqlalchemy
 load_dotenv()
 
 
-DATABASE_URL = os.environ.get('POSTGRES_RDS', None)
+DATABASE_URL = os.environ.get('POSTGRES', None)
 
 database = databases.Database(DATABASE_URL)
 metadata = sqlalchemy.MetaData()

@@ -1,5 +1,5 @@
-from beteyeview.models.match import Match
-from beteyeview.models.book import Bet9jaOdd, BetkingOdd, NairabetOdd
+from populate.models.match import Match
+from populate.models.book import Bet9jaOdd, BetkingOdd, NairabetOdd
 from datetime import datetime
 
 

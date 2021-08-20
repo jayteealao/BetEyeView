@@ -1,5 +1,5 @@
 import ormar
-from beteyeview.database.db import database, metadata
+from populate.database.db import database, metadata
 
 
 class BaseMeta(ormar.ModelMeta):

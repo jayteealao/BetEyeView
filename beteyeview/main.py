@@ -1,12 +1,9 @@
 from mangum import Mangum
 from fastapi import FastAPI
 import os
-from beteyeview.crud.create import populate_tables
 from beteyeview.crud.read import read_match_all, read_by_league, read_bet9ja
 from beteyeview.database import database, engine, metadata
 from beteyeview.models.match import Match
-from pprint import pprint
-from alembic import command, config
 from typing import List
 
 # deployed, the application will be accessible with an endpoint that has this shape: https://XXXXXXX.execute-api.eu-west-1.amazonaws.com/stage.
@@ -18,15 +15,6 @@ openapi_prefix = f"/{stage}" if stage else "/"
 
 app = FastAPI(title="BetEyeView_server", openapi_prefix=openapi_prefix)
 app.state.database = database
-# alembic_cfg = config.Config("./alembic.ini")
-
-
-# @app.on_event("startup")
-# async def migrate():
-#     engine.dispose()
-#     with engine.begin() as connection:
-#         alembic_cfg.attributes['connection'] = connection
-#         command.upgrade(alembic_cfg, "head")
 
 
 @app.on_event("startup")
@@ -35,10 +23,6 @@ async def startup():
     database_ = app.state.database
     if not database_.is_connected:
         await database_.connect()
-    await populate_tables()
-    test = await read_by_league("Premier League")
-    for match in test:
-        pprint(match.match)
 
 
 @app.on_event("shutdown")
@@ -46,7 +30,6 @@ async def shutdown():
     database_ = app.state.database
     if database_.is_connected:
         await database_.disconnect()
-    # metadata.drop_all(bind=engine)
 
 
 @app.get("/")
