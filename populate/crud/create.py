@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from populate.crud.bookies_data import retrieve_data
 from populate.models.book import Bet9jaOdd, BetkingOdd, NairabetOdd
 from populate.models.match import Match
@@ -8,7 +6,7 @@ from populate.models.match import Match
 async def populate_tables():
 
     data = retrieve_data()
-# TODO add mechanism for adding date to odds table after creating it
+    
     for event, b9, bk, nb in data:
         if not await Match.objects.get_or_none(match=event['match'], league=event['league']):
             match = await Match.objects.create(**event)
