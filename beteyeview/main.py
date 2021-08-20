@@ -13,7 +13,7 @@ from typing import List
 stage = os.environ.get("STAGE", None)
 openapi_prefix = f"/{stage}" if stage else "/"
 
-app = FastAPI(title="BetEyeView_server", openapi_prefix=openapi_prefix)
+app = FastAPI(title="BetEyeView_server", root_path=openapi_prefix)
 app.state.database = database
 
 
