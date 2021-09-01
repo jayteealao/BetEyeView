@@ -5,7 +5,7 @@ check = os.environ.get('AWS_REGION', None)
 if check == None:
     import sys
     sys.path.append("C:/Users/HP/Documents/dev/BetEyeView")
-print(sys.path)
+    print(sys.path)
 
 
 from populate.crud.create import populate_tables
@@ -31,7 +31,8 @@ async def main():
 
 def handler(event, context):
     logger.info('Started function')
-    asyncio.run(main())
+    asyncio.get_event_loop().run_until_complete(main())
+    logger.info('Finished function')
 
 
 if __name__ == '__main__':

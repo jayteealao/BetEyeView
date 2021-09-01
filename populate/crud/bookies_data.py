@@ -1,5 +1,9 @@
-from NaijaBet_Api.bookmakers import bet9ja, betking, nairabet
+from populate.utils.logger import get_logger
+logger = get_logger(__name__)
 
+logger.debug('initializing bookmaker api')
+from NaijaBet_Api.bookmakers import bet9ja, betking, nairabet  # noqa
+logger.debug('successfully initialized bookmaker api')
 
 
 def clean_odds(list_of_dicts: list):
