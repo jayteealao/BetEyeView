@@ -2,7 +2,7 @@ name: deploy-py-lambda
 on:
   push:
     branches:
-      - ci_cd
+      - bev_cd
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Deploy code to Lambda
-        uses: jayteealao/py-lambda-action@v1.0.7
+        uses: jayteealao/py-lambda-action@bev_only
         with:
           lambda_layer_arn: "arn:aws:lambda:us-east-2:760141912310:layer:bevtestlayer"
           lambda_function_name: "bevtest"
